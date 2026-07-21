@@ -391,7 +391,7 @@ export const MARKUP = `<div class="root">
         <article class="quote-card is-active" data-quote>
           <div class="quote-mark">“</div>
           <p class="quote-text">தோல்வி என்பது எதற்கும் முடிவல்ல. அது சற்று முன்னே வந்து சேரும் தகவல். “முடியாது” என்பது மக்கள் மிக விரைவாக முடித்துவிடும் ஒரு வாக்கியம் மட்டும்தான் — ஏனெனில் பதிலை வெளியே தேடுவதை நிறுத்தி, உள்ளே தேடத் தொடங்கும் அந்த நொடியிலேயே முடியாதது முடியும். தோல்வி என்பது கடுமையான உழைப்பின் ரசீது மட்டுமே. வேலையை அஞ்சுங்கள் — உங்கள் கனவு கனவாகவே இருக்கும். தோல்வியை எதிர்கொள்ளுங்கள் — கனவு நனவாகும்.</p>
-          <div class="quote-attr">— Founder and CEO, Arun Raj</div>
+          <div class="quote-attr">— Founder and CEO, அருண் ராஜ்</div>
         </article>
         <article class="quote-card" data-quote aria-hidden="true">
           <div class="quote-mark">“</div>
