@@ -279,12 +279,31 @@
   function el(id) { return document.getElementById(id); }
   function set(id, html) { var n = el(id); if (n) n.innerHTML = html; }
 
-  // Insight cover: real <img> when a Sanity cover URL is present, else the placeholder slot.
-  function insCover(p, ph) {
+  // Insight cover: cropped image or a clean gradient placeholder (no image-slot).
+  function insCover(p, size) {
+    size = size || 'md';
     if (p && p.cover) {
-      return '<img src="' + p.cover + '" alt="' + esc(p.title || '') + '" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;">';
+      return '<div class="ins-cover ins-cover--' + size + '"><img src="' + esc(p.cover) + '" alt="" loading="lazy" decoding="async"></div>';
     }
-    return '<image-slot shape="rect" fit="cover" placeholder="' + ph + '"></image-slot>';
+    var label = (p && p.tag) ? String(p.tag).slice(0, 1) : 'S';
+    return '<div class="ins-cover ins-cover--' + size + ' ins-cover--empty" aria-hidden="true"><span class="ins-cover-glow"></span><span class="ins-cover-mark">' + esc(label) + '</span></div>';
+  }
+
+  function insCard(p, featured) {
+    var arrow = '<svg class="ins-card-arrow" width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 9h11M10 4.5 14.5 9 10 13.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    var cls = featured ? 'ins-card ins-card--spotlight reveal' : 'ins-card';
+    return '<a href="/insight/' + encodeURIComponent(p.id) + '" class="' + cls + '" data-insight="' + p.id + '">' +
+      insCover(p, featured ? 'lg' : 'md') +
+      '<div class="ins-card-body">' +
+        '<div class="ins-card-top">' +
+          '<span class="ins-pill">' + esc(p.tag) + '</span>' +
+          '<span class="ins-card-meta">' + esc(p.date) + ' · ' + esc(p.read) + '</span>' +
+        '</div>' +
+        '<h2 class="ins-card-title">' + esc(p.title) + '</h2>' +
+        '<p class="ins-card-excerpt">' + esc(p.excerpt) + '</p>' +
+        (featured ? '<span class="ins-card-cta">Read the piece' + arrow + '</span>' : arrow) +
+      '</div>' +
+    '</a>';
   }
 
   function renderArticles(list) {
@@ -460,29 +479,24 @@
     (function renderInsights() {
       var feat = insightsPosts[0];
       var rest = insightsPosts.slice(1);
-      var arrow = '<svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 9h11M10 4.5 14.5 9 10 13.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-      var featHTML = '<a href="/insight/' + encodeURIComponent(feat.id) + '" class="ins-feature reveal" data-insight="' + feat.id + '"><div class="ins-feature-media">' + insCover(feat, 'Drop cover image') + '</div>' +
-        '<div class="ins-feature-body"><div class="ins-meta"><span class="ins-tag">' + feat.tag + '</span><span class="ins-dot"></span><span>' + feat.date + '</span><span class="ins-dot"></span><span>' + feat.read + '</span></div>' +
-        '<h2 class="ins-feature-title">' + feat.title + '</h2><p class="ins-feature-excerpt">' + feat.excerpt + '</p>' +
-        '<span class="ins-readmore">Read the piece ' + arrow + '</span></div></a>';
-      var listHTML = rest.map(function (p) {
-        return '<a href="/insight/' + encodeURIComponent(p.id) + '" class="ins-row" data-insight="' + p.id + '"><div class="ins-row-thumb">' + insCover(p, 'Cover') + '</div><div class="ins-row-main"><div class="ins-meta"><span class="ins-tag">' + p.tag + '</span><span class="ins-dot"></span><span>' + p.date + '</span><span class="ins-dot"></span><span>' + p.read + '</span></div>' +
-          '<div class="ins-row-title">' + p.title + '</div><p class="ins-row-excerpt">' + p.excerpt + '</p></div>' + arrow + '</a>';
-      }).join('');
+      var spotlight = feat ? insCard(feat, true) : '';
+      var grid = rest.map(function (p) { return insCard(p, false); }).join('');
       set('insights',
-        '<div class="section ins-hero" style="border-top:none; padding-top:clamp(110px,15vh,170px); padding-bottom:clamp(32px,4vw,48px); overflow:hidden;">' +
-          '<div class="ins-hero-anim" aria-hidden="true"><svg viewBox="0 0 1200 360" preserveAspectRatio="xMidYMid slice" fill="none">' +
-            '<g class="ins-wave" stroke="var(--acc)" stroke-width="2" fill="none" opacity="0.9"><path d="M0 180 Q 150 180 200 180 T 400 180 T 600 180 T 800 180 T 1000 180 T 1200 180"/></g>' +
-            '<g stroke="var(--pbd)" stroke-width="1"><line x1="0" y1="90" x2="1200" y2="90"/><line x1="0" y1="270" x2="1200" y2="270"/></g>' +
-            '<g class="ins-broadcast"><circle cx="1000" cy="120" r="10"/><circle cx="1000" cy="120" r="10"/><circle cx="1000" cy="120" r="10"/></g>' +
-            '<circle class="ins-tower" cx="1000" cy="120" r="5" fill="var(--acc)"/>' +
-            '<g class="ins-packets" fill="var(--acc)"><circle r="3"><animateMotion dur="3.2s" repeatCount="indefinite" path="M0 180 Q 150 120 300 180 T 600 180 T 900 180 T 1200 180"/></circle><circle r="3"><animateMotion dur="3.2s" begin="1.1s" repeatCount="indefinite" path="M0 180 Q 150 120 300 180 T 600 180 T 900 180 T 1200 180"/></circle><circle r="3"><animateMotion dur="3.2s" begin="2.2s" repeatCount="indefinite" path="M0 180 Q 150 120 300 180 T 600 180 T 900 180 T 1200 180"/></circle></g>' +
-          '</svg></div>' +
-          '<div class="ins-head"><div class="eyebrow rise-1">Insights</div>' +
-          '<h1 class="rise-2" style="font-size:clamp(34px,5.6vw,62px); line-height:1.05; font-weight:700; letter-spacing:-0.03em;">Notes from the <span class="acc">layer.</span></h1>' +
-          '<p style="margin-top:clamp(14px,2.2vw,20px); font-size:clamp(15px,2.8vw,18px); line-height:1.6; color:var(--mut); max-width:520px;">Thinking on travel infrastructure, the engineering underneath it, and how we build \u2014 written by the team, not a marketing desk.</p></div>' +
-        '</div>' +
-        '<div class="section" style="border-top:1px solid var(--ln);"><div class="ins-wrap">' + featHTML + '<div class="ins-list">' + listHTML + '</div></div></div>'
+        '<div class="ins-page">' +
+          '<header class="section ins-page-head">' +
+            '<div class="ins-page-head-inner">' +
+              '<div class="eyebrow rise-1">Insights</div>' +
+              '<h1 class="ins-page-title rise-2">Notes from the <span class="acc">layer.</span></h1>' +
+              '<p class="ins-page-lead rise-3">Thinking on travel infrastructure, the engineering underneath it, and how we build — written by the team, not a marketing desk.</p>' +
+            '</div>' +
+          '</header>' +
+          '<section class="section ins-page-body">' +
+            '<div class="ins-shell">' +
+              spotlight +
+              (grid ? '<div class="ins-grid">' + grid + '</div>' : '') +
+            '</div>' +
+          '</section>' +
+        '</div>'
       );
     })();
 
@@ -694,7 +708,7 @@
           '<h1 class="post-title">' + esc(p.title) + '</h1>' +
           '<p class="post-lead">' + esc(p.excerpt) + '</p>' +
         '</div>' +
-        '<div class="post-cover">' + insCover(p, 'Drop a cover image for this article') + '</div>' +
+        '<div class="post-cover">' + insCover(p, 'xl') + '</div>' +
       '</div>' +
       '<div class="section" style="border-top:1px solid var(--ln);"><div class="post-body">' + bodyHTML +
         '<div class="post-byline">Written by the Sudarva team.</div>' +
