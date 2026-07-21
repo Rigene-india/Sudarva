@@ -61,29 +61,63 @@ export const MARKUP = `<div class="root">
         </div>
       </div>
 
-      <div class="dropdown dropdown--compact">
+      <div class="dropdown">
         <div class="nav-item"><span>Sudarva</span><svg width="12" height="8" viewBox="0 0 12 8" fill="none"><path d="M1 1.5 6 6.5 11 1.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div class="compact-menu">
-          <a href="/about" class="compact-link" data-nav="About Sudarva">About Sudarva</a>
-          <a href="/careers" class="compact-link" data-nav="Careers">Careers<span class="hiring-badge">Hiring</span></a>
-          <a href="/insight" class="compact-link" data-nav="Insights">Insights</a>
-          <div class="compact-divider"></div>
-          <div class="theme-switcher" id="theme-switcher" data-theme-switcher>
-            <button type="button" class="theme-side" data-theme-set="light" aria-label="Light mode" aria-pressed="true">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4.4"/><path d="M12 2v2.5M12 19.5V22M4.2 4.2l1.8 1.8M18 18l1.8 1.8M2 12h2.5M19.5 12H22M4.2 19.8 6 18M18 6l1.8-1.8"/></svg>
-              <span>Light</span>
-            </button>
-            <button type="button" class="theme-toggle" data-theme-toggle role="switch" aria-checked="false" aria-label="Toggle dark mode"><span class="theme-knob"></span></button>
-            <button type="button" class="theme-side" data-theme-set="dark" aria-label="Dark mode" aria-pressed="false">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5Z"/></svg>
-              <span>Dark</span>
-            </button>
+        <div class="mega mega--brand">
+          <div class="mega-bg" aria-hidden="true">
+            <div class="mega-bg-glow"></div>
+            <div class="mega-bg-grid"></div>
+            <svg class="mega-bg-art" viewBox="0 0 560 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <radialGradient id="mega-hub" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(398 168) rotate(90) scale(90)">
+                  <stop stop-color="var(--acc)" stop-opacity="0.35"/>
+                  <stop offset="0.45" stop-color="var(--acc)" stop-opacity="0.08"/>
+                  <stop offset="1" stop-color="var(--acc)" stop-opacity="0"/>
+                </radialGradient>
+              </defs>
+              <g class="mega-bg-orbit">
+                <circle cx="398" cy="168" r="118" stroke="currentColor" stroke-width="1" opacity="0.22"/>
+                <circle cx="398" cy="168" r="88" stroke="currentColor" stroke-width="1" opacity="0.16"/>
+                <ellipse cx="398" cy="168" rx="118" ry="42" stroke="currentColor" stroke-width="1" opacity="0.2"/>
+                <ellipse cx="398" cy="168" rx="118" ry="72" stroke="currentColor" stroke-width="1" opacity="0.14"/>
+              </g>
+              <g class="mega-bg-mesh" stroke="var(--acc)" stroke-width="1" stroke-linecap="round">
+                <path d="M118 260 C 220 190, 310 170, 398 168" opacity="0.42"/>
+                <path d="M60 300 C 170 240, 280 200, 398 168" opacity="0.28"/>
+                <path d="M180 120 L398 168" opacity="0.35"/>
+              </g>
+              <g class="mega-bg-nodes" fill="var(--acc)">
+                <circle cx="118" cy="260" r="2.5" opacity="0.7"/>
+                <circle cx="60" cy="300" r="2" opacity="0.45"/>
+                <circle cx="180" cy="120" r="2" opacity="0.5"/>
+              </g>
+              <circle class="mega-bg-hub" cx="398" cy="168" r="90" fill="url(#mega-hub)"/>
+              <circle cx="398" cy="168" r="5" fill="var(--acc)" opacity="0.9"/>
+              <circle cx="398" cy="168" r="12" stroke="var(--acc)" stroke-width="1.5" opacity="0.5"/>
+              <g class="mega-bg-ring" stroke="var(--acc)" stroke-width="1" fill="none" opacity="0.35">
+                <circle cx="398" cy="168" r="22"/>
+                <circle cx="398" cy="168" r="22"/>
+              </g>
+            </svg>
+          </div>
+          <div class="mega-inner">
+            <div class="mega-lead">
+              <div class="mega-lead-k">Sudarva</div>
+              <div class="mega-lead-t">Beyond the network.</div>
+              <p class="mega-lead-p">The company, the team, and the thinking behind the connectivity layer.</p>
+            </div>
+            <div class="mega-links">
+              <a href="/about" class="mega-link" data-nav="About Sudarva"><span class="mega-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg></span><span class="mega-tx"><b>About Sudarva</b><small>The story, mission and people building the layer travel runs on.</small></span></a>
+              <a href="/careers" class="mega-link" data-nav="Careers"><span class="mega-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></span><span class="mega-tx"><b>Careers<span class="hiring-badge">Hiring</span></b><small>Join engineers, operators and partners shaping global travel connectivity.</small></span></a>
+              <a href="/insight" class="mega-link" data-nav="Insights"><span class="mega-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2Z"/><path d="M8 7h8M8 11h8"/></svg></span><span class="mega-tx"><b>Insights</b><small>Perspectives on infrastructure, partnerships and the future of travel data.</small></span></a>
+            </div>
           </div>
         </div>
       </div>
     </div>
 
     <div class="nav-actions">
+      <button type="button" class="theme-btn" id="theme-btn" data-theme-toggle aria-label="Toggle theme"></button>
       <a href="/contact" class="contact-btn" data-nav="Contact"><span>Contact Us</span><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 9h11M10 4.5 14.5 9 10 13.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
     </div>

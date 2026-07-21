@@ -487,22 +487,59 @@
             '<div class="ins-bg" aria-hidden="true">' +
               '<div class="ins-bg-glow"></div>' +
               '<div class="ins-bg-grid"></div>' +
-              '<svg class="ins-bg-net" viewBox="0 0 480 360" fill="none">' +
-                '<g class="ins-bg-lats" stroke="currentColor" stroke-width="1">' +
-                  '<ellipse cx="340" cy="150" rx="130" ry="52"/>' +
-                  '<ellipse cx="340" cy="150" rx="88" ry="35"/>' +
-                  '<circle cx="340" cy="150" r="130"/>' +
+              '<svg class="ins-bg-art" viewBox="0 0 560 400" fill="none" xmlns="http://www.w3.org/2000/svg">' +
+                '<defs>' +
+                  '<radialGradient id="ins-hub" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(398 168) rotate(90) scale(90)">' +
+                    '<stop stop-color="var(--acc)" stop-opacity="0.35"/>' +
+                    '<stop offset="0.45" stop-color="var(--acc)" stop-opacity="0.08"/>' +
+                    '<stop offset="1" stop-color="var(--acc)" stop-opacity="0"/>' +
+                  '</radialGradient>' +
+                  '<linearGradient id="ins-layer-top" x1="0" y1="0" x2="0" y2="1">' +
+                    '<stop stop-color="var(--acc)" stop-opacity="0.14"/>' +
+                    '<stop offset="1" stop-color="var(--acc)" stop-opacity="0.02"/>' +
+                  '</linearGradient>' +
+                  '<linearGradient id="ins-layer-mid" x1="0" y1="0" x2="0" y2="1">' +
+                    '<stop stop-color="var(--acc)" stop-opacity="0.1"/>' +
+                    '<stop offset="1" stop-color="var(--acc)" stop-opacity="0.015"/>' +
+                  '</linearGradient>' +
+                  '<linearGradient id="ins-layer-base" x1="0" y1="0" x2="0" y2="1">' +
+                    '<stop stop-color="var(--acc)" stop-opacity="0.07"/>' +
+                    '<stop offset="1" stop-color="var(--acc)" stop-opacity="0.01"/>' +
+                  '</linearGradient>' +
+                '</defs>' +
+                '<g class="ins-bg-orbit">' +
+                  '<circle cx="398" cy="168" r="118" stroke="currentColor" stroke-width="1" opacity="0.22"/>' +
+                  '<circle cx="398" cy="168" r="88" stroke="currentColor" stroke-width="1" opacity="0.16"/>' +
+                  '<ellipse cx="398" cy="168" rx="118" ry="42" stroke="currentColor" stroke-width="1" opacity="0.2"/>' +
+                  '<ellipse cx="398" cy="168" rx="118" ry="72" stroke="currentColor" stroke-width="1" opacity="0.14"/>' +
+                  '<path d="M398 50v236M280 168h236" stroke="currentColor" stroke-width="1" opacity="0.1"/>' +
                 '</g>' +
-                '<path class="ins-bg-route" d="M40 260 C 140 190, 230 170, 340 150" stroke="var(--acc)" stroke-width="1.2" stroke-linecap="round" fill="none"/>' +
-                '<path class="ins-bg-route ins-bg-route--2" d="M20 300 C 120 250, 220 200, 360 165" stroke="var(--acc)" stroke-width="1" stroke-linecap="round" fill="none"/>' +
+                '<g class="ins-bg-stack">' +
+                  '<path class="ins-layer ins-layer--3" d="M248 292 368 248 488 292 368 336Z" fill="url(#ins-layer-base)" stroke="currentColor" stroke-width="1" opacity="0.55"/>' +
+                  '<path class="ins-layer ins-layer--2" d="M228 252 348 208 468 252 348 296Z" fill="url(#ins-layer-mid)" stroke="currentColor" stroke-width="1" opacity="0.65"/>' +
+                  '<path class="ins-layer ins-layer--1" d="M208 212 328 168 448 212 328 256Z" fill="url(#ins-layer-top)" stroke="var(--acc)" stroke-width="1.2" opacity="0.75"/>' +
+                '</g>' +
+                '<g class="ins-bg-mesh" stroke="var(--acc)" stroke-width="1" stroke-linecap="round">' +
+                  '<path d="M328 212 368 248" opacity="0.45"/>' +
+                  '<path d="M368 248 398 168" opacity="0.55"/>' +
+                  '<path d="M328 168 398 168" opacity="0.35"/>' +
+                  '<path d="M268 228 328 212" opacity="0.3"/>' +
+                  '<path d="M348 208 398 168" opacity="0.4"/>' +
+                  '<path d="M398 168 448 212" opacity="0.35"/>' +
+                '</g>' +
                 '<g class="ins-bg-nodes" fill="var(--acc)">' +
-                  '<circle cx="340" cy="150" r="3.5"/>' +
-                  '<circle cx="200" cy="195" r="2"/>' +
-                  '<circle cx="80" cy="245" r="2"/>' +
+                  '<circle cx="328" cy="212" r="2.5" opacity="0.7"/>' +
+                  '<circle cx="368" cy="248" r="2.5" opacity="0.75"/>' +
+                  '<circle cx="328" cy="168" r="2" opacity="0.5"/>' +
+                  '<circle cx="448" cy="212" r="2" opacity="0.45"/>' +
+                  '<circle cx="268" cy="228" r="1.8" opacity="0.35"/>' +
                 '</g>' +
-                '<g class="ins-bg-pulse" fill="none" stroke="var(--acc)" stroke-width="1">' +
-                  '<circle cx="340" cy="150" r="10"/>' +
-                  '<circle cx="340" cy="150" r="10"/>' +
+                '<circle class="ins-bg-hub" cx="398" cy="168" r="90" fill="url(#ins-hub)"/>' +
+                '<circle cx="398" cy="168" r="5" fill="var(--acc)" opacity="0.9"/>' +
+                '<circle cx="398" cy="168" r="12" stroke="var(--acc)" stroke-width="1.5" opacity="0.5"/>' +
+                '<g class="ins-bg-ring" stroke="var(--acc)" stroke-width="1" fill="none" opacity="0.35">' +
+                  '<circle cx="398" cy="168" r="22"/>' +
+                  '<circle cx="398" cy="168" r="22"/>' +
                 '</g>' +
               '</svg>' +
             '</div>' +
@@ -563,11 +600,15 @@
   }
 
   /* ---------- theme ---------- */
+  var THEME_SUN = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4.4"/><path d="M12 2v2.5M12 19.5V22M4.2 4.2l1.8 1.8M18 18l1.8 1.8M2 12h2.5M19.5 12H22M4.2 19.8 6 18M18 6l1.8-1.8"/></svg>';
+  var THEME_MOON = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5Z"/></svg>';
   function isDarkTheme() {
     return document.documentElement.getAttribute('data-theme') === 'dark';
   }
   function applyThemeUI() {
     var dark = isDarkTheme();
+    var themeBtn = document.getElementById('theme-btn');
+    if (themeBtn) themeBtn.innerHTML = dark ? THEME_SUN : THEME_MOON;
     var switchers = document.querySelectorAll('[data-theme-switcher]');
     for (var i = 0; i < switchers.length; i++) {
       var root = switchers[i];
