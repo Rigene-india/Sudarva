@@ -483,6 +483,32 @@
       var grid = rest.map(function (p) { return insCard(p, false); }).join('');
       set('insights',
         '<div class="ins-page">' +
+          '<div class="ins-bg" aria-hidden="true">' +
+            '<div class="ins-bg-glow"></div>' +
+            '<div class="ins-bg-grid"></div>' +
+            '<svg class="ins-bg-net" viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid slice" fill="none">' +
+              '<g class="ins-bg-lats" stroke="currentColor" stroke-width="1" opacity="0.35">' +
+                '<ellipse cx="920" cy="220" rx="220" ry="90"/>' +
+                '<ellipse cx="920" cy="220" rx="160" ry="65"/>' +
+                '<ellipse cx="920" cy="220" rx="100" ry="40"/>' +
+                '<circle cx="920" cy="220" r="220"/>' +
+                '<path d="M700 220h440M920 0v440"/>' +
+              '</g>' +
+              '<g class="ins-bg-routes" stroke="var(--acc)" stroke-width="1.4" stroke-linecap="round" fill="none">' +
+                '<path class="ins-bg-route" d="M180 420 C 340 280, 520 260, 700 220"/>' +
+                '<path class="ins-bg-route ins-bg-route--2" d="M120 520 C 380 480, 560 340, 820 250"/>' +
+                '<path class="ins-bg-route ins-bg-route--3" d="M260 580 C 480 520, 640 380, 880 280"/>' +
+              '</g>' +
+              '<g class="ins-bg-nodes" fill="var(--acc)">' +
+                '<circle cx="180" cy="420" r="3.5"/><circle cx="420" cy="310" r="2.5"/>' +
+                '<circle cx="700" cy="220" r="4"/><circle cx="920" cy="220" r="5"/>' +
+                '<circle cx="820" cy="250" r="3"/><circle cx="560" cy="400" r="2.5"/>' +
+              '</g>' +
+              '<g class="ins-bg-pulse" fill="none" stroke="var(--acc)" stroke-width="1.5">' +
+                '<circle cx="920" cy="220" r="12"/><circle cx="920" cy="220" r="12"/><circle cx="920" cy="220" r="12"/>' +
+              '</g>' +
+            '</svg>' +
+          '</div>' +
           '<header class="section ins-page-head">' +
             '<div class="ins-page-head-inner">' +
               '<div class="eyebrow rise-1">Insights</div>' +

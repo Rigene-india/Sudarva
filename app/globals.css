@@ -615,14 +615,95 @@ a { color: inherit; text-decoration: none; }
 .legal-link:hover { color: var(--text); }
 
 /* ---- insights (list) ---- */
-.ins-page { min-height: 100%; }
+.ins-page {
+  position: relative;
+  min-height: 100%;
+  isolation: isolate;
+  overflow: clip;
+}
+
+/* network / layer atmosphere */
+.ins-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.ins-bg-glow {
+  position: absolute;
+  top: -8%;
+  right: -12%;
+  width: min(820px, 90vw);
+  height: min(620px, 70vh);
+  background: radial-gradient(ellipse at 55% 40%, rgba(255, 59, 48, 0.13), transparent 62%);
+  filter: blur(8px);
+}
+[data-theme="dark"] .ins-bg-glow {
+  background: radial-gradient(ellipse at 55% 40%, rgba(255, 59, 48, 0.18), transparent 64%);
+}
+.ins-bg-grid {
+  position: absolute;
+  inset: 0;
+  opacity: 0.45;
+  background-image:
+    linear-gradient(var(--ln) 1px, transparent 1px),
+    linear-gradient(90deg, var(--ln) 1px, transparent 1px);
+  background-size: 56px 56px;
+  -webkit-mask-image: radial-gradient(ellipse 75% 55% at 78% 18%, #000 0%, transparent 72%);
+  mask-image: radial-gradient(ellipse 75% 55% at 78% 18%, #000 0%, transparent 72%);
+}
+.ins-bg-net {
+  position: absolute;
+  top: 0;
+  right: -4%;
+  width: min(920px, 88vw);
+  height: clamp(380px, 58vh, 640px);
+  color: var(--pbd);
+  opacity: 0.85;
+  -webkit-mask-image: linear-gradient(105deg, transparent 8%, #000 38%, #000 78%, transparent 100%),
+    linear-gradient(180deg, #000 35%, transparent 92%);
+  mask-image: linear-gradient(105deg, transparent 8%, #000 38%, #000 78%, transparent 100%),
+    linear-gradient(180deg, #000 35%, transparent 92%);
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
+}
+.ins-bg-lats { color: var(--pbd); }
+.ins-bg-route {
+  stroke-dasharray: 8 10;
+  animation: ins-route-flow 18s linear infinite;
+}
+.ins-bg-route--2 { animation-duration: 24s; animation-direction: reverse; opacity: 0.7; }
+.ins-bg-route--3 { animation-duration: 28s; opacity: 0.55; }
+@keyframes ins-route-flow {
+  from { stroke-dashoffset: 0; }
+  to { stroke-dashoffset: -240; }
+}
+.ins-bg-nodes circle { opacity: 0.85; }
+.ins-bg-pulse circle {
+  transform-origin: 920px 220px;
+  animation: ins-net-pulse 3.2s ease-out infinite;
+}
+.ins-bg-pulse circle:nth-child(2) { animation-delay: 1.05s; }
+.ins-bg-pulse circle:nth-child(3) { animation-delay: 2.1s; }
+@keyframes ins-net-pulse {
+  0% { transform: scale(1); opacity: 0.7; }
+  100% { transform: scale(6.5); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ins-bg-route,
+  .ins-bg-pulse circle { animation: none; }
+}
+
 .ins-page-head {
+  position: relative;
+  z-index: 1;
   border-top: none;
   padding-top: clamp(110px, 15vh, 168px);
   padding-bottom: clamp(36px, 5vw, 56px);
   border-bottom: 1px solid var(--ln);
 }
-.ins-page-head-inner { max-width: 720px; margin: 0 auto; }
+.ins-page-head-inner { position: relative; z-index: 1; max-width: 720px; margin: 0 auto; }
 .ins-page-title {
   font-size: clamp(34px, 5.6vw, 58px);
   line-height: 1.05;
@@ -638,10 +719,12 @@ a { color: inherit; text-decoration: none; }
   max-width: 52ch;
 }
 .ins-page-body {
+  position: relative;
+  z-index: 1;
   padding-top: clamp(36px, 5vw, 56px);
   padding-bottom: clamp(48px, 7vw, 88px);
 }
-.ins-shell { max-width: 1120px; margin: 0 auto; display: flex; flex-direction: column; gap: clamp(28px, 4vw, 44px); }
+.ins-shell { position: relative; z-index: 1; max-width: 1120px; margin: 0 auto; display: flex; flex-direction: column; gap: clamp(28px, 4vw, 44px); }
 
 /* cover image / placeholder */
 .ins-cover {
@@ -979,6 +1062,8 @@ a { color: inherit; text-decoration: none; }
   .policy-layout { grid-template-columns: 1fr; }
   .policy-toc { position: static; margin-bottom: 8px; }
   /* Mobile keeps the current card layout (covers + stacked cards) */
+  .ins-bg-net { opacity: 0.55; width: 120%; right: -28%; }
+  .ins-bg-grid { opacity: 0.28; }
   .ins-grid { grid-template-columns: 1fr; }
   .ins-card--spotlight .ins-card-title { max-width: none; }
   .ins-card:not(.ins-card--spotlight) .ins-card-arrow { position: static; margin-top: 16px; margin-left: 0; }
