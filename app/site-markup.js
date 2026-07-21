@@ -391,7 +391,7 @@ export const MARKUP = `<div class="root">
         <article class="quote-card is-active" data-quote>
           <div class="quote-mark">“</div>
           <p class="quote-text">Failure was never the end of anything. It was information, arriving early. Impossible is just a sentence people finish too early — because the impossible becomes possible the moment you stop looking outside for the answer and start looking within. Failure is only the receipt of hard work. Fear the work, and your dream stays a dream. Face the failure, and the dream comes true.</p>
-          <div class="quote-attr">— Founder and CEO, Arun Raj</div>
+          <div class="quote-attr">— Founder and CEO, அருண் ராஜ்</div>
         </article>
         <article class="quote-card" data-quote aria-hidden="true">
           <div class="quote-mark">“</div>
