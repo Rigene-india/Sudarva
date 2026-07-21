@@ -3,6 +3,8 @@ const nextConfig = {
   // The site drives its own DOM via the original script.js; double-invoking
   // effects in strict mode would double-boot it, so we disable it.
   reactStrictMode: false,
+  // Sanity Studio (embedded at /studio)
+  transpilePackages: ["next-sanity"],
 };
 
 export default nextConfig;

@@ -1,0 +1,10 @@
+{
+  "root": true,
+  "project": {
+    "name": "Sudarva"
+  },
+  "api": {
+    "projectId": "62ezzo2a",
+    "dataset": "production"
+  }
+}

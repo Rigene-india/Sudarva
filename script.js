@@ -401,8 +401,17 @@
     }).join(''));
 
     set('aud-grid', audiences.map(function (a) {
-      return '<div class="aud-card"><div class="aud-tag">' + a.tag + '</div><div class="aud-title">' + a.title + '</div><p class="aud-body">' + a.body + '</p></div>';
+      return '<div class="atropos aud-atropos">' +
+        '<div class="atropos-scale"><div class="atropos-rotate"><div class="atropos-inner">' +
+          '<div class="aud-card">' +
+            '<div class="aud-tag" data-atropos-offset="6">' + a.tag + '</div>' +
+            '<div class="aud-title" data-atropos-offset="3">' + a.title + '</div>' +
+            '<p class="aud-body" data-atropos-offset="1">' + a.body + '</p>' +
+          '</div>' +
+        '</div></div></div>' +
+      '</div>';
     }).join(''));
+    initAudAtropos();
 
     set('api-points', apiPoints.map(function (pt) {
       return '<div class="api-point"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" style="flex-shrink:0;"><path d="M3.5 9.5 7 13l7.5-8" stroke="var(--acc)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>' + pt + '</span></div>';
@@ -520,22 +529,74 @@
   }
 
   /* ---------- theme ---------- */
-  var SUN = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4.4"/><path d="M12 2v2.5M12 19.5V22M4.2 4.2l1.8 1.8M18 18l1.8 1.8M2 12h2.5M19.5 12H22M4.2 19.8 6 18M18 6l1.8-1.8"/></svg>';
-  var MOON = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5Z"/></svg>';
-  function applyThemeIcon() {
-    var dark = document.documentElement.getAttribute('data-theme') === 'dark';
-    el('theme-btn').innerHTML = dark ? SUN : MOON;
-    var lbl = el('mm-theme-label');
-    if (lbl) lbl.textContent = dark ? 'Light mode' : 'Dark mode';
-    var mmBtn = el('mm-theme-btn');
-    if (mmBtn) mmBtn.innerHTML = dark ? SUN : MOON;
+  function isDarkTheme() {
+    return document.documentElement.getAttribute('data-theme') === 'dark';
   }
-  function toggleTheme() {
-    var cur = document.documentElement.getAttribute('data-theme');
-    var next = cur === 'dark' ? 'light' : 'dark';
+  function applyThemeUI() {
+    var dark = isDarkTheme();
+    var switchers = document.querySelectorAll('[data-theme-switcher]');
+    for (var i = 0; i < switchers.length; i++) {
+      var root = switchers[i];
+      var toggle = root.querySelector('[data-theme-toggle]');
+      var lightBtn = root.querySelector('[data-theme-set="light"]');
+      var darkBtn = root.querySelector('[data-theme-set="dark"]');
+      if (toggle) toggle.setAttribute('aria-checked', dark ? 'true' : 'false');
+      if (lightBtn) {
+        lightBtn.setAttribute('aria-pressed', dark ? 'false' : 'true');
+        lightBtn.classList.toggle('is-active', !dark);
+      }
+      if (darkBtn) {
+        darkBtn.setAttribute('aria-pressed', dark ? 'true' : 'false');
+        darkBtn.classList.toggle('is-active', dark);
+      }
+    }
+  }
+  function setTheme(next) {
     document.documentElement.setAttribute('data-theme', next);
     try { localStorage.setItem('sudarva-theme', next); } catch (e) {}
-    applyThemeIcon();
+    applyThemeUI();
+  }
+  function toggleTheme() {
+    setTheme(isDarkTheme() ? 'light' : 'dark');
+  }
+  function wireThemeSwitchers() {
+    document.addEventListener('click', function (e) {
+      var setBtn = e.target.closest('[data-theme-set]');
+      if (setBtn) {
+        e.preventDefault();
+        setTheme(setBtn.getAttribute('data-theme-set'));
+        return;
+      }
+      var toggle = e.target.closest('[data-theme-toggle]');
+      if (toggle) {
+        e.preventDefault();
+        toggleTheme();
+      }
+    });
+  }
+
+  /* ---------- atropos (audience cards) ---------- */
+  var audAtroposInstances = [];
+  function initAudAtropos() {
+    for (var i = 0; i < audAtroposInstances.length; i++) {
+      try { audAtroposInstances[i].destroy(); } catch (e) {}
+    }
+    audAtroposInstances = [];
+    if (typeof Atropos !== 'function') return;
+    var nodes = document.querySelectorAll('.aud-atropos');
+    for (var n = 0; n < nodes.length; n++) {
+      audAtroposInstances.push(Atropos({
+        el: nodes[n],
+        activeOffset: 28,
+        shadowScale: 1.02,
+        shadowOffset: 40,
+        rotateXMax: 10,
+        rotateYMax: 10,
+        highlight: true,
+        shadow: true,
+        rotateTouch: 'scroll-y'
+      }));
+    }
   }
 
   /* ---------- routing ---------- */
@@ -788,11 +849,11 @@
       var saved = localStorage.getItem('sudarva-theme');
       if (saved) document.documentElement.setAttribute('data-theme', saved);
     } catch (e) {}
-    applyThemeIcon();
+    applyThemeUI();
+    wireThemeSwitchers();
 
     renderLists();
 
-    el('theme-btn').addEventListener('click', toggleTheme);
     el('burger').addEventListener('click', toggleMenu);
 
     // desktop dropdown hover-intent (stable across the nav-item → panel gap)
@@ -821,8 +882,6 @@
         if (!isOpen) { grp.classList.add('open'); this.setAttribute('aria-expanded', 'true'); }
       });
     }
-    var mmTheme = el('mm-theme');
-    if (mmTheme) mmTheme.addEventListener('click', toggleTheme);
 
     var contactForm = el('contact-form');
     if (contactForm) {

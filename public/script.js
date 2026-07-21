@@ -294,22 +294,23 @@
       return;
     }
     set('support-articles', list.map(function (a) {
-      return '<a href="#" class="support-article" data-article="' + a.id + '"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--acc)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4h10a2 2 0 0 1 2 2v14l-7-3-7 3V6a2 2 0 0 1 2-2Z"/></svg><span>' + a.q + '</span>' + arrow + '</a>';
+      return '<a href="/support/' + encodeURIComponent(a.id) + '" class="support-article" data-article="' + a.id + '"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--acc)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4h10a2 2 0 0 1 2 2v14l-7-3-7 3V6a2 2 0 0 1 2-2Z"/></svg><span>' + a.q + '</span>' + arrow + '</a>';
     }).join(''));
   }
 
-  function showArticle(id) {
+  function showArticle(id, opts) {
+    opts = opts || {};
     var idx = -1;
     for (var i = 0; i < supportArticles.length; i++) if (supportArticles[i].id === id) { idx = i; break; }
-    if (idx === -1) { showPage('support'); return; }
+    if (idx === -1) { showPage('support', { silent: opts.silent }); return; }
     var a = supportArticles[idx];
     var related = supportArticles.filter(function (x) { return x.cat === a.cat && x.id !== a.id; }).slice(0, 3);
     var relHTML = related.length ? '<div class="sa-related"><div class="sa-related-h">More in ' + a.cat + '</div>' + related.map(function (r) {
-      return '<a href="#" class="sa-related-link" data-article="' + r.id + '"><span>' + r.q + '</span><svg width="16" height="16" viewBox="0 0 18 18" fill="none"><path d="M3 9h11M10 4.5 14.5 9 10 13.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>';
+      return '<a href="/support/' + encodeURIComponent(r.id) + '" class="sa-related-link" data-article="' + r.id + '"><span>' + r.q + '</span><svg width="16" height="16" viewBox="0 0 18 18" fill="none"><path d="M3 9h11M10 4.5 14.5 9 10 13.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>';
     }).join('') + '</div>' : '';
     set('support-article',
       '<div class="section" style="border-top:none; padding-top:clamp(104px,14vh,150px);"><div class="sa-wrap">' +
-        '<a href="#" class="sa-back" data-nav="Support"><svg width="16" height="16" viewBox="0 0 18 18" fill="none"><path d="M15 9H4M8 4.5 3.5 9 8 13.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>All support</a>' +
+        '<a href="/support" class="sa-back" data-nav="Support"><svg width="16" height="16" viewBox="0 0 18 18" fill="none"><path d="M15 9H4M8 4.5 3.5 9 8 13.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>All support</a>' +
         '<div class="sa-cat">' + a.cat + '</div>' +
         '<h1 class="sa-title">' + a.q + '</h1>' +
         '<div class="sa-body">' + a.body.map(function (p) { return '<p>' + p + '</p>'; }).join('') + '</div>' +
@@ -317,7 +318,8 @@
         relHTML +
       '</div></div>'
     );
-    showPage('support-article');
+    showPage('support-article', { silent: true });
+    if (!opts.silent) setUrl('/support/' + encodeURIComponent(id));
   }
 
   var insightsPosts = (typeof window !== 'undefined' && window.SUDARVA_INSIGHTS && window.SUDARVA_INSIGHTS.length) ? window.SUDARVA_INSIGHTS : [
@@ -386,8 +388,17 @@
     }).join(''));
 
     set('aud-grid', audiences.map(function (a) {
-      return '<div class="aud-card"><div class="aud-tag">' + a.tag + '</div><div class="aud-title">' + a.title + '</div><p class="aud-body">' + a.body + '</p></div>';
+      return '<div class="atropos aud-atropos">' +
+        '<div class="atropos-scale"><div class="atropos-rotate"><div class="atropos-inner">' +
+          '<div class="aud-card">' +
+            '<div class="aud-tag" data-atropos-offset="6">' + a.tag + '</div>' +
+            '<div class="aud-title" data-atropos-offset="3">' + a.title + '</div>' +
+            '<p class="aud-body" data-atropos-offset="1">' + a.body + '</p>' +
+          '</div>' +
+        '</div></div></div>' +
+      '</div>';
     }).join(''));
+    initAudAtropos();
 
     set('api-points', apiPoints.map(function (pt) {
       return '<div class="api-point"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" style="flex-shrink:0;"><path d="M3.5 9.5 7 13l7.5-8" stroke="var(--acc)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>' + pt + '</span></div>';
@@ -416,15 +427,24 @@
     set('footer-cols', footerCols.map(function (col) {
       var links = col.links.map(function (l) {
         var solMap = { 'Travel Connectivity': 'sol-travel', 'Partner Enablement': 'sol-partner', 'Network Infrastructure': 'sol-network', 'API Solutions': 'sol-api' };
-        var nav = l === 'Careers' ? ' data-nav="Careers"' : (l === 'About Sudarva' || l === 'About Us' ? ' data-nav="About Sudarva"' : (l === 'Guides' ? ' data-nav="Guides"' : (l === 'Insights' ? ' data-nav="Insights"' : (l === 'Support' ? ' data-nav="Support"' : (l === 'Contact Us' ? ' data-nav="Contact"' : (l === 'Sudarva Connect' ? ' data-nav="Connect"' : (l === 'Sudarva Go' ? ' data-nav="Connect"' : (solMap[l] ? ' data-nav="' + solMap[l] + '"' : ''))))))));
+        var navKey = l === 'Careers' ? 'Careers'
+          : (l === 'About Sudarva' || l === 'About Us' ? 'About Sudarva'
+          : (l === 'Guides' ? 'Guides'
+          : (l === 'Insights' ? 'Insights'
+          : (l === 'Support' ? 'Support'
+          : (l === 'Contact Us' ? 'Contact'
+          : (l === 'Sudarva Connect' || l === 'Sudarva Go' ? 'Connect'
+          : (solMap[l] || '')))))));
+        var href = pathForNav(navKey) || '#';
+        var nav = navKey ? ' data-nav="' + navKey + '"' : '';
         var badge = l === 'Sudarva Go' ? '<span class="soon-badge">Coming soon</span>' : (l === 'Careers' ? '<span class="hiring-badge">Hiring</span>' : '');
-        return '<a href="#" class="footer-link"' + nav + '>' + l + badge + '</a>';
+        return '<a href="' + href + '" class="footer-link"' + nav + '>' + l + badge + '</a>';
       }).join('');
       return '<div><div class="footer-col-title">' + col.title + '</div><div class="footer-col-rule"></div><div class="footer-col-links">' + links + '</div></div>';
     }).join(''));
 
     set('footer-legal-links', legalLinks.map(function (l) {
-      return '<a href="#" class="legal-link" data-policy="' + l.id + '">' + l.label + '</a>';
+      return '<a href="/policies/' + encodeURIComponent(l.id) + '" class="legal-link" data-policy="' + l.id + '">' + l.label + '</a>';
     }).join(''));
 
     set('support-cats', supportCats.map(function (c) {
@@ -441,12 +461,12 @@
       var feat = insightsPosts[0];
       var rest = insightsPosts.slice(1);
       var arrow = '<svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 9h11M10 4.5 14.5 9 10 13.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-      var featHTML = '<a href="#" class="ins-feature reveal" data-insight="' + feat.id + '"><div class="ins-feature-media">' + insCover(feat, 'Drop cover image') + '</div>' +
+      var featHTML = '<a href="/insight/' + encodeURIComponent(feat.id) + '" class="ins-feature reveal" data-insight="' + feat.id + '"><div class="ins-feature-media">' + insCover(feat, 'Drop cover image') + '</div>' +
         '<div class="ins-feature-body"><div class="ins-meta"><span class="ins-tag">' + feat.tag + '</span><span class="ins-dot"></span><span>' + feat.date + '</span><span class="ins-dot"></span><span>' + feat.read + '</span></div>' +
         '<h2 class="ins-feature-title">' + feat.title + '</h2><p class="ins-feature-excerpt">' + feat.excerpt + '</p>' +
         '<span class="ins-readmore">Read the piece ' + arrow + '</span></div></a>';
       var listHTML = rest.map(function (p) {
-        return '<a href="#" class="ins-row" data-insight="' + p.id + '"><div class="ins-row-thumb">' + insCover(p, 'Cover') + '</div><div class="ins-row-main"><div class="ins-meta"><span class="ins-tag">' + p.tag + '</span><span class="ins-dot"></span><span>' + p.date + '</span><span class="ins-dot"></span><span>' + p.read + '</span></div>' +
+        return '<a href="/insight/' + encodeURIComponent(p.id) + '" class="ins-row" data-insight="' + p.id + '"><div class="ins-row-thumb">' + insCover(p, 'Cover') + '</div><div class="ins-row-main"><div class="ins-meta"><span class="ins-tag">' + p.tag + '</span><span class="ins-dot"></span><span>' + p.date + '</span><span class="ins-dot"></span><span>' + p.read + '</span></div>' +
           '<div class="ins-row-title">' + p.title + '</div><p class="ins-row-excerpt">' + p.excerpt + '</p></div>' + arrow + '</a>';
       }).join('');
       set('insights',
@@ -505,35 +525,161 @@
   }
 
   /* ---------- theme ---------- */
-  var SUN = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4.4"/><path d="M12 2v2.5M12 19.5V22M4.2 4.2l1.8 1.8M18 18l1.8 1.8M2 12h2.5M19.5 12H22M4.2 19.8 6 18M18 6l1.8-1.8"/></svg>';
-  var MOON = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5Z"/></svg>';
-  function applyThemeIcon() {
-    var dark = document.documentElement.getAttribute('data-theme') === 'dark';
-    el('theme-btn').innerHTML = dark ? SUN : MOON;
-    var lbl = el('mm-theme-label');
-    if (lbl) lbl.textContent = dark ? 'Light mode' : 'Dark mode';
-    var mmBtn = el('mm-theme-btn');
-    if (mmBtn) mmBtn.innerHTML = dark ? SUN : MOON;
+  function isDarkTheme() {
+    return document.documentElement.getAttribute('data-theme') === 'dark';
   }
-  function toggleTheme() {
-    var cur = document.documentElement.getAttribute('data-theme');
-    var next = cur === 'dark' ? 'light' : 'dark';
+  function applyThemeUI() {
+    var dark = isDarkTheme();
+    var switchers = document.querySelectorAll('[data-theme-switcher]');
+    for (var i = 0; i < switchers.length; i++) {
+      var root = switchers[i];
+      var toggle = root.querySelector('[data-theme-toggle]');
+      var lightBtn = root.querySelector('[data-theme-set="light"]');
+      var darkBtn = root.querySelector('[data-theme-set="dark"]');
+      if (toggle) toggle.setAttribute('aria-checked', dark ? 'true' : 'false');
+      if (lightBtn) {
+        lightBtn.setAttribute('aria-pressed', dark ? 'false' : 'true');
+        lightBtn.classList.toggle('is-active', !dark);
+      }
+      if (darkBtn) {
+        darkBtn.setAttribute('aria-pressed', dark ? 'true' : 'false');
+        darkBtn.classList.toggle('is-active', dark);
+      }
+    }
+  }
+  function setTheme(next) {
     document.documentElement.setAttribute('data-theme', next);
     try { localStorage.setItem('sudarva-theme', next); } catch (e) {}
-    applyThemeIcon();
+    applyThemeUI();
+  }
+  function toggleTheme() {
+    setTheme(isDarkTheme() ? 'light' : 'dark');
+  }
+  function wireThemeSwitchers() {
+    document.addEventListener('click', function (e) {
+      var setBtn = e.target.closest('[data-theme-set]');
+      if (setBtn) {
+        e.preventDefault();
+        setTheme(setBtn.getAttribute('data-theme-set'));
+        return;
+      }
+      var toggle = e.target.closest('[data-theme-toggle]');
+      if (toggle) {
+        e.preventDefault();
+        toggleTheme();
+      }
+    });
   }
 
-  /* ---------- routing ---------- */
+  /* ---------- atropos (audience cards) ---------- */
+  var audAtroposInstances = [];
+  function initAudAtropos() {
+    for (var i = 0; i < audAtroposInstances.length; i++) {
+      try { audAtroposInstances[i].destroy(); } catch (e) {}
+    }
+    audAtroposInstances = [];
+    if (typeof Atropos !== 'function') return;
+    var nodes = document.querySelectorAll('.aud-atropos');
+    for (var n = 0; n < nodes.length; n++) {
+      audAtroposInstances.push(Atropos({
+        el: nodes[n],
+        activeOffset: 28,
+        shadowScale: 1.02,
+        shadowOffset: 40,
+        rotateXMax: 10,
+        rotateYMax: 10,
+        highlight: true,
+        shadow: true,
+        rotateTouch: 'scroll-y'
+      }));
+    }
+  }
+
+  /* ---------- routing (URL paths) ---------- */
   var quoteStarted = false;
+  var navSilent = false;
 
   var POLICIES = (typeof window !== 'undefined' && window.SUDARVA_POLICIES) || {};
   var policyOrder = ['terms', 'privacy', 'cookie', 'aup', 'refund', 'dpa'];
   function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 
-  function showInsight(id) {
+  function parsePath(pathname) {
+    var path = String(pathname || '/').replace(/\/+$/, '') || '/';
+    var fixed = {
+      '/': 'home',
+      '/about': 'about',
+      '/careers': 'careers',
+      '/connect': 'connect',
+      '/contact': 'contact',
+      '/guides': 'guides',
+      '/support': 'support',
+      '/insight': 'insights',
+      '/solutions/travel': 'sol-travel',
+      '/solutions/partner': 'sol-partner',
+      '/solutions/network': 'sol-network',
+      '/solutions/api': 'sol-api'
+    };
+    if (fixed[path]) return { view: fixed[path], path: path };
+    var m;
+    m = path.match(/^\/insight\/([^/]+)$/);
+    if (m) return { view: 'insight', slug: decodeURIComponent(m[1]), path: path };
+    m = path.match(/^\/support\/([^/]+)$/);
+    if (m) return { view: 'support-article', articleId: decodeURIComponent(m[1]), path: path };
+    m = path.match(/^\/policies\/([^/]+)$/);
+    if (m) return { view: 'policy', policyId: decodeURIComponent(m[1]), path: path };
+    return { view: 'home', path: '/' };
+  }
+
+  function pathForNav(v) {
+    if (v === 'home') return '/';
+    if (v === 'About Sudarva') return '/about';
+    if (v === 'Careers') return '/careers';
+    if (v === 'Guides') return '/guides';
+    if (v === 'Insights') return '/insight';
+    if (v === 'Support') return '/support';
+    if (v === 'Connect') return '/connect';
+    if (v === 'Contact') return '/contact';
+    if (v === 'sol-travel') return '/solutions/travel';
+    if (v === 'sol-partner') return '/solutions/partner';
+    if (v === 'sol-network') return '/solutions/network';
+    if (v === 'sol-api') return '/solutions/api';
+    return null;
+  }
+
+  function pathForView(view, opts) {
+    opts = opts || {};
+    if (view === 'insight' && opts.slug) return '/insight/' + encodeURIComponent(opts.slug);
+    if (view === 'support-article' && opts.articleId) return '/support/' + encodeURIComponent(opts.articleId);
+    if (view === 'policy' && opts.policyId) return '/policies/' + encodeURIComponent(opts.policyId);
+    if (view === 'insights') return '/insight';
+    if (view === 'home') return '/';
+    if (view === 'about') return '/about';
+    if (view === 'careers') return '/careers';
+    if (view === 'connect') return '/connect';
+    if (view === 'contact') return '/contact';
+    if (view === 'guides') return '/guides';
+    if (view === 'support') return '/support';
+    if (view === 'sol-travel') return '/solutions/travel';
+    if (view === 'sol-partner') return '/solutions/partner';
+    if (view === 'sol-network') return '/solutions/network';
+    if (view === 'sol-api') return '/solutions/api';
+    return null;
+  }
+
+  function setUrl(path, replace) {
+    if (navSilent || !path) return;
+    if (path === window.location.pathname) return;
+    try {
+      if (replace) history.replaceState({ path: path }, '', path);
+      else history.pushState({ path: path }, '', path);
+    } catch (e) {}
+  }
+
+  function showInsight(id, opts) {
+    opts = opts || {};
     var idx = -1;
     for (var i = 0; i < insightsPosts.length; i++) if (insightsPosts[i].id === id) { idx = i; break; }
-    if (idx === -1) { showPage('insights'); return; }
+    if (idx === -1) { showPage('insights', { silent: opts.silent }); return; }
     var p = insightsPosts[idx];
     var next = insightsPosts[(idx + 1) % insightsPosts.length];
     var bodyHTML = p.body.map(function (b) {
@@ -543,7 +689,7 @@
     set('insight',
       '<div class="section" style="border-top:none; padding-top:clamp(104px,14vh,150px); padding-bottom:clamp(28px,3vw,40px);">' +
         '<div class="post-head">' +
-          '<a href="#" class="post-back" data-nav="Insights"><svg width="16" height="16" viewBox="0 0 18 18" fill="none"><path d="M15 9H4M8 4.5 3.5 9 8 13.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>All insights</a>' +
+          '<a href="/insight" class="post-back" data-nav="Insights"><svg width="16" height="16" viewBox="0 0 18 18" fill="none"><path d="M15 9H4M8 4.5 3.5 9 8 13.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>All insights</a>' +
           '<div class="ins-meta" style="margin-top:26px;"><span class="ins-tag">' + esc(p.tag) + '</span><span class="ins-dot"></span><span>' + esc(p.date) + '</span><span class="ins-dot"></span><span>' + esc(p.read) + ' read</span></div>' +
           '<h1 class="post-title">' + esc(p.title) + '</h1>' +
           '<p class="post-lead">' + esc(p.excerpt) + '</p>' +
@@ -554,19 +700,21 @@
         '<div class="post-byline">Written by the Sudarva team.</div>' +
       '</div></div>' +
       '<div class="section" style="border-top:1px solid var(--ln);"><div class="post-next"><div class="post-next-label">Next</div>' +
-        '<a href="#" class="post-next-link" data-insight="' + next.id + '"><div><div class="ins-meta"><span class="ins-tag">' + esc(next.tag) + '</span></div><div class="post-next-title">' + esc(next.title) + '</div></div>' +
+        '<a href="/insight/' + encodeURIComponent(next.id) + '" class="post-next-link" data-insight="' + next.id + '"><div><div class="ins-meta"><span class="ins-tag">' + esc(next.tag) + '</span></div><div class="post-next-title">' + esc(next.title) + '</div></div>' +
         '<svg width="22" height="22" viewBox="0 0 18 18" fill="none"><path d="M3 9h11M10 4.5 14.5 9 10 13.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></a>' +
       '</div></div>'
     );
-    showPage('insight');
+    showPage('insight', { silent: true });
+    if (!opts.silent) setUrl('/insight/' + encodeURIComponent(id));
   }
 
-  function showPolicy(id) {
+  function showPolicy(id, opts) {
+    opts = opts || {};
     var p = POLICIES[id];
-    if (!p) { showPage('home'); return; }
+    if (!p) { showPage('home', { silent: opts.silent }); return; }
     var nav = policyOrder.map(function (pid) {
       var pp = POLICIES[pid]; if (!pp) return '';
-      return '<a href="#" class="policy-navlink' + (pid === id ? ' active' : '') + '" data-policy="' + pid + '">' + esc(pp.title) + '</a>';
+      return '<a href="/policies/' + encodeURIComponent(pid) + '" class="policy-navlink' + (pid === id ? ' active' : '') + '" data-policy="' + pid + '">' + esc(pp.title) + '</a>';
     }).join('');
     var toc = p.sections.map(function (s) {
       return '<a href="#pol-' + s.n + '" class="policy-toc-link">' + esc(s.n) + ' &middot; ' + esc(s.heading) + '</a>';
@@ -593,10 +741,12 @@
         '<div class="policy-content">' + body + '</div>' +
       '</div></div>'
     );
-    showPage('policy');
+    showPage('policy', { silent: true });
+    if (!opts.silent) setUrl('/policies/' + encodeURIComponent(id));
   }
 
-  function showPage(page) {
+  function showPage(page, opts) {
+    opts = opts || {};
     var views = document.querySelectorAll('.view');
     for (var i = 0; i < views.length; i++) views[i].classList.remove('active');
     var target = el(page) || el('home');
@@ -604,18 +754,36 @@
     closeMenu();
     window.scrollTo(0, 0);
     if (page === 'about' && !quoteStarted) { quoteStarted = true; startQuote(); }
+    if (!opts.silent) {
+      var path = pathForView(page, opts);
+      if (path) setUrl(path);
+    }
   }
   function routeFromNav(v) {
-    if (v === 'home') showPage('home');
-    else if (v === 'About Sudarva') showPage('about');
-    else if (v === 'Careers') showPage('careers');
-    else if (v === 'Guides') showPage('guides');
-    else if (v === 'Insights') showPage('insights');
-    else if (v === 'Support') showPage('support');
-    else if (v === 'Connect') showPage('connect');
-    else if (v === 'sol-travel' || v === 'sol-partner' || v === 'sol-network' || v === 'sol-api') showPage(v);
-    else if (v === 'Contact') showPage('contact');
-    // Solutions / Platform / Developers: no dedicated page in this build
+    var path = pathForNav(v);
+    if (path) setUrl(path);
+    if (v === 'home') showPage('home', { silent: true });
+    else if (v === 'About Sudarva') showPage('about', { silent: true });
+    else if (v === 'Careers') showPage('careers', { silent: true });
+    else if (v === 'Guides') showPage('guides', { silent: true });
+    else if (v === 'Insights') showPage('insights', { silent: true });
+    else if (v === 'Support') showPage('support', { silent: true });
+    else if (v === 'Connect') showPage('connect', { silent: true });
+    else if (v === 'sol-travel' || v === 'sol-partner' || v === 'sol-network' || v === 'sol-api') showPage(v, { silent: true });
+    else if (v === 'Contact') showPage('contact', { silent: true });
+  }
+
+  function applyPath(pathname) {
+    var r = parsePath(pathname);
+    navSilent = true;
+    try {
+      if (r.view === 'insight' && r.slug) showInsight(r.slug, { silent: true });
+      else if (r.view === 'support-article' && r.articleId) showArticle(r.articleId, { silent: true });
+      else if (r.view === 'policy' && r.policyId) showPolicy(r.policyId, { silent: true });
+      else showPage(r.view || 'home', { silent: true });
+    } finally {
+      navSilent = false;
+    }
   }
 
   /* ---------- mobile menu ---------- */
@@ -773,11 +941,11 @@
       var saved = localStorage.getItem('sudarva-theme');
       if (saved) document.documentElement.setAttribute('data-theme', saved);
     } catch (e) {}
-    applyThemeIcon();
+    applyThemeUI();
+    wireThemeSwitchers();
 
     renderLists();
 
-    el('theme-btn').addEventListener('click', toggleTheme);
     el('burger').addEventListener('click', toggleMenu);
 
     // desktop dropdown hover-intent (stable across the nav-item → panel gap)
@@ -806,8 +974,6 @@
         if (!isOpen) { grp.classList.add('open'); this.setAttribute('aria-expanded', 'true'); }
       });
     }
-    var mmTheme = el('mm-theme');
-    if (mmTheme) mmTheme.addEventListener('click', toggleTheme);
 
     var contactForm = el('contact-form');
     if (contactForm) {
@@ -874,6 +1040,15 @@
       e.preventDefault();
       routeFromNav(t.getAttribute('data-nav'));
     });
+
+    // browser back / forward
+    window.addEventListener('popstate', function () {
+      applyPath(window.location.pathname);
+    });
+
+    // open the view that matches the current URL (e.g. /insight/my-slug)
+    applyPath(window.SUDARVA_INITIAL_PATH || window.location.pathname);
+    window.__sudarvaApplyPath = applyPath;
 
     // scrolled nav background
     window.addEventListener('scroll', function () {

@@ -7,8 +7,8 @@ export default defineConfig({
   name: "sudarva",
   title: "Sudarva",
 
-  // Set after `npx sanity init` (or paste your project id from sanity.io/manage).
-  projectId: process.env.SANITY_STUDIO_PROJECT_ID || "REPLACE_WITH_PROJECT_ID",
+  // Project: Sudarva (https://sanity.io/manage → 62ezzo2a)
+  projectId: process.env.SANITY_STUDIO_PROJECT_ID || "62ezzo2a",
   dataset: process.env.SANITY_STUDIO_DATASET || "production",
 
   plugins: [structureTool(), visionTool()],

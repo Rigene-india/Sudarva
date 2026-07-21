@@ -18,10 +18,10 @@ export const MARKUP = `<div class="root">
               <p class="mega-lead-p">Everything a travel business needs to sell data — without becoming a telecom company.</p>
             </div>
             <div class="mega-links">
-              <a class="mega-link" data-nav="sol-travel"><span class="mega-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><ellipse cx="12" cy="12" rx="3.4" ry="8"/><path d="M4 12h16M5 8h14M5 16h14"/></svg></span><span class="mega-tx"><b>Travel Connectivity</b><small>Working data the moment they land, across 200+ countries.</small></span></a>
-              <a class="mega-link" data-nav="sol-partner"><span class="mega-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.4"/><path d="M4 19c0-2.8 2.2-5 5-5s5 2.2 5 5"/><path d="M15.5 14.2c2.1.2 3.8 2 3.8 4.8"/></svg></span><span class="mega-tx"><b>Partner Enablement</b><small>Wallets, commissions and reporting agents already understand.</small></span></a>
-              <a class="mega-link" data-nav="sol-network"><span class="mega-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 20 7 12 11 4 7 12 3Z"/><path d="M4 12l8 4 8-4M4 16.5l8 4 8-4"/></svg></span><span class="mega-tx"><b>Network Infrastructure</b><small>Multi-profile provisioning, metering and settlement at the core.</small></span></a>
-              <a class="mega-link" data-nav="sol-api"><span class="mega-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m9 8-5 4 5 4M15 8l5 4-5 4"/></svg></span><span class="mega-tx"><b>API Solutions</b><small>One private integration for onboarded partners.</small></span></a>
+              <a href="/solutions/travel" class="mega-link" data-nav="sol-travel"><span class="mega-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><ellipse cx="12" cy="12" rx="3.4" ry="8"/><path d="M4 12h16M5 8h14M5 16h14"/></svg></span><span class="mega-tx"><b>Travel Connectivity</b><small>Working data the moment they land, across 200+ countries.</small></span></a>
+              <a href="/solutions/partner" class="mega-link" data-nav="sol-partner"><span class="mega-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.4"/><path d="M4 19c0-2.8 2.2-5 5-5s5 2.2 5 5"/><path d="M15.5 14.2c2.1.2 3.8 2 3.8 4.8"/></svg></span><span class="mega-tx"><b>Partner Enablement</b><small>Wallets, commissions and reporting agents already understand.</small></span></a>
+              <a href="/solutions/network" class="mega-link" data-nav="sol-network"><span class="mega-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 20 7 12 11 4 7 12 3Z"/><path d="M4 12l8 4 8-4M4 16.5l8 4 8-4"/></svg></span><span class="mega-tx"><b>Network Infrastructure</b><small>Multi-profile provisioning, metering and settlement at the core.</small></span></a>
+              <a href="/solutions/api" class="mega-link" data-nav="sol-api"><span class="mega-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m9 8-5 4 5 4M15 8l5 4-5 4"/></svg></span><span class="mega-tx"><b>API Solutions</b><small>One private integration for onboarded partners.</small></span></a>
             </div>
           </div>
         </div>
@@ -37,7 +37,7 @@ export const MARKUP = `<div class="root">
               <p class="mega-lead-p">The applications partners and travellers touch, running on the same infrastructure.</p>
             </div>
             <div class="mega-links">
-              <a class="mega-link" data-nav="Connect"><span class="mega-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="3" width="12" height="18" rx="3"/><path d="M10 7h4"/></svg></span><span class="mega-tx"><b>Sudarva Connect</b><small>Launch a fully branded eSIM business on running infrastructure.</small></span></a>
+              <a href="/connect" class="mega-link" data-nav="Connect"><span class="mega-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="3" width="12" height="18" rx="3"/><path d="M10 7h4"/></svg></span><span class="mega-tx"><b>Sudarva Connect</b><small>Launch a fully branded eSIM business on running infrastructure.</small></span></a>
               <a class="mega-link mega-link--soon"><span class="mega-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M13 3 4 14h7l-1 7 9-11h-7l1-7Z"/></svg></span><span class="mega-tx"><b>Sudarva Go<span class="soon-badge">Coming soon</span></b><small>The next layer beyond data — same rails, more of the trip.</small></span></a>
             </div>
           </div>
@@ -54,35 +54,37 @@ export const MARKUP = `<div class="root">
               <p class="mega-lead-p">Provided to onboarded partners. Everything you need from first call to production.</p>
             </div>
             <div class="mega-links">
-              <a class="mega-link" data-nav="Guides"><span class="mega-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5a2 2 0 0 1 2-2h6v18H6a2 2 0 0 0-2 2V5Z"/><path d="M20 5a2 2 0 0 0-2-2h-6v18h6a2 2 0 0 1 2 2V5Z"/></svg></span><span class="mega-tx"><b>Guides</b><small>Get access, keys, wallet and your first provisioning call.</small></span></a>
-              <a class="mega-link" data-nav="Support"><span class="mega-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.2 9.3a2.8 2.8 0 0 1 5.3 1c0 1.9-2.8 2.5-2.8 2.5"/><path d="M12 17h.01"/></svg></span><span class="mega-tx"><b>Support</b><small>Help articles and partner support, one business day.</small></span></a>
+              <a href="/guides" class="mega-link" data-nav="Guides"><span class="mega-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5a2 2 0 0 1 2-2h6v18H6a2 2 0 0 0-2 2V5Z"/><path d="M20 5a2 2 0 0 0-2-2h-6v18h6a2 2 0 0 1 2 2V5Z"/></svg></span><span class="mega-tx"><b>Guides</b><small>Get access, keys, wallet and your first provisioning call.</small></span></a>
+              <a href="/support" class="mega-link" data-nav="Support"><span class="mega-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.2 9.3a2.8 2.8 0 0 1 5.3 1c0 1.9-2.8 2.5-2.8 2.5"/><path d="M12 17h.01"/></svg></span><span class="mega-tx"><b>Support</b><small>Help articles and partner support, one business day.</small></span></a>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="dropdown">
+      <div class="dropdown dropdown--compact">
         <div class="nav-item"><span>Sudarva</span><svg width="12" height="8" viewBox="0 0 12 8" fill="none"><path d="M1 1.5 6 6.5 11 1.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-        <div class="mega">
-          <div class="mega-inner">
-            <div class="mega-lead">
-              <div class="mega-lead-k">Sudarva</div>
-              <div class="mega-lead-t">The company behind the layer.</div>
-              <p class="mega-lead-p">Why we exist, how we build, and who we're looking for.</p>
-            </div>
-            <div class="mega-links">
-              <a class="mega-link" data-nav="About Sudarva"><span class="mega-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v4h1"/></svg></span><span class="mega-tx"><b>About Sudarva</b><small>The infrastructure that makes global travel seamless.</small></span></a>
-              <a class="mega-link" data-nav="Careers"><span class="mega-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></span><span class="mega-tx"><b>Careers<span class="hiring-badge">Hiring</span></b><small>An aim worth having, and the means to build a life.</small></span></a>
-              <a class="mega-link" data-nav="Insights"><span class="mega-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16M4 10h16M4 15h10"/></svg></span><span class="mega-tx"><b>Insights</b><small>Notes from the layer — thinking, engineering, company.</small></span></a>
-            </div>
+        <div class="compact-menu">
+          <a href="/about" class="compact-link" data-nav="About Sudarva">About Sudarva</a>
+          <a href="/careers" class="compact-link" data-nav="Careers">Careers<span class="hiring-badge">Hiring</span></a>
+          <a href="/insight" class="compact-link" data-nav="Insights">Insights</a>
+          <div class="compact-divider"></div>
+          <div class="theme-switcher" id="theme-switcher" data-theme-switcher>
+            <button type="button" class="theme-side" data-theme-set="light" aria-label="Light mode" aria-pressed="true">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4.4"/><path d="M12 2v2.5M12 19.5V22M4.2 4.2l1.8 1.8M18 18l1.8 1.8M2 12h2.5M19.5 12H22M4.2 19.8 6 18M18 6l1.8-1.8"/></svg>
+              <span>Light</span>
+            </button>
+            <button type="button" class="theme-toggle" data-theme-toggle role="switch" aria-checked="false" aria-label="Toggle dark mode"><span class="theme-knob"></span></button>
+            <button type="button" class="theme-side" data-theme-set="dark" aria-label="Dark mode" aria-pressed="false">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5Z"/></svg>
+              <span>Dark</span>
+            </button>
           </div>
         </div>
       </div>
     </div>
 
     <div class="nav-actions">
-      <button class="theme-btn" id="theme-btn" aria-label="Toggle theme"></button>
-      <a href="#" class="contact-btn" data-nav="Contact"><span>Contact Us</span><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 9h11M10 4.5 14.5 9 10 13.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <a href="/contact" class="contact-btn" data-nav="Contact"><span>Contact Us</span><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 9h11M10 4.5 14.5 9 10 13.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
     </div>
   </nav>
@@ -117,10 +119,22 @@ export const MARKUP = `<div class="root">
       <div class="mm-sub">
         <div class="mm-item" data-nav="About Sudarva">About Sudarva</div>
         <div class="mm-item" data-nav="Careers">Careers<span class="hiring-badge">Hiring</span></div>
+        <div class="mm-item" data-nav="Insights">Insights</div>
+        <div class="compact-divider mm-theme-divider"></div>
+        <div class="theme-switcher mm-theme-switcher" data-theme-switcher>
+          <button type="button" class="theme-side" data-theme-set="light" aria-label="Light mode" aria-pressed="true">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4.4"/><path d="M12 2v2.5M12 19.5V22M4.2 4.2l1.8 1.8M18 18l1.8 1.8M2 12h2.5M19.5 12H22M4.2 19.8 6 18M18 6l1.8-1.8"/></svg>
+            <span>Light</span>
+          </button>
+          <button type="button" class="theme-toggle" data-theme-toggle role="switch" aria-checked="false" aria-label="Toggle dark mode"><span class="theme-knob"></span></button>
+          <button type="button" class="theme-side" data-theme-set="dark" aria-label="Dark mode" aria-pressed="false">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5Z"/></svg>
+            <span>Dark</span>
+          </button>
+        </div>
       </div>
     </div>
-    <button class="mm-theme" id="mm-theme"><span id="mm-theme-label">Dark mode</span><span class="mm-theme-btn" id="mm-theme-btn"></span></button>
-    <a href="#" class="mm-contact" data-nav="Contact">Contact Us</a>
+    <a href="/contact" class="mm-contact" data-nav="Contact">Contact Us</a>
   </div>
 
   <!-- ==================== HOME VIEW ==================== -->
@@ -791,7 +805,7 @@ export const MARKUP = `<div class="root">
 
   <!-- ===== FOOTER ===== -->
   <footer class="footer">
-    <div class="footer-divider"><div class="footer-node"></div></div>
+    <div class="footer-divider"></div>
     <div class="footer-grid">
       <div class="footer-brand">
         <div class="brand-name" style="font-size:28px;">Sudarva<span class="acc">.</span></div>
