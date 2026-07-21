@@ -1015,13 +1015,17 @@
 
   /* ---------- wire up ---------- */
   function init() {
-    // restore saved theme
+    // restore saved theme (also set early in layout; keep in sync here)
     try {
       var saved = localStorage.getItem('sudarva-theme');
       if (saved) document.documentElement.setAttribute('data-theme', saved);
     } catch (e) {}
     applyThemeUI();
     wireThemeSwitchers();
+    // re-enable theme color transitions after first paint
+    requestAnimationFrame(function () {
+      document.documentElement.classList.remove('theme-booting');
+    });
 
     renderLists();
 

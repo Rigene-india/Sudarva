@@ -11,10 +11,15 @@ export const viewport = {
   initialScale: 1,
 };
 
+/** Runs before paint so a saved dark theme does not flash white on refresh. */
+const themeInitScript = `(function(){try{var t=localStorage.getItem('sudarva-theme');document.documentElement.setAttribute('data-theme',t==='dark'?'dark':'light');}catch(e){document.documentElement.setAttribute('data-theme','light');}document.documentElement.classList.add('theme-booting');})();`;
+
 export default function RootLayout({ children }) {
-  // data-theme mirrors the original standalone build; script.js toggles it at runtime.
   return (
-    <html lang="en" data-theme="light" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
       <body suppressHydrationWarning>{children}</body>
     </html>
   );

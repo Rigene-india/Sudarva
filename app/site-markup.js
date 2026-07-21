@@ -181,7 +181,7 @@ export const MARKUP = `<div class="root">
 
     <div class="hero">
       <div class="eyebrow">One network. Every journey.</div>
-      <h1 style="font-size:clamp(38px,7.5vw,82px); line-height:1.03; font-weight:700; letter-spacing:-0.03em; margin-bottom:clamp(22px,3.5vw,34px);">Infrastructure that powers the <span class="acc">future of travel.</span></h1>
+      <h1 class="home-hero-title"><span class="hero-grad">Infrastructure that powers the</span> <span class="acc">future of travel.</span></h1>
       <p style="font-size:clamp(16px,4vw,19px); line-height:1.62; color:var(--mut); max-width:520px; margin-bottom:clamp(30px,5vw,44px);">Sudarva is the technology infrastructure that connects travel businesses, partners and travellers across Asia and beyond.</p>
       <div class="hero-btns">
         <a href="#" class="btn-primary"><span>Explore Platform</span><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 9h11M10 4.5 14.5 9 10 13.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
@@ -197,7 +197,7 @@ export const MARKUP = `<div class="root">
     <div class="section">
       <div class="section-head reveal">
         <div class="eyebrow">The gap</div>
-        <h2 class="h2">A connectivity API isn't a <span class="acc">travel platform.</span></h2>
+        <h2 class="h2 statement-h2">A connectivity API isn't a<br><span class="acc">travel platform.</span></h2>
         <p class="lead">Plugging into a network gets you data. Running a travel business needs everything that happens around it.</p>
       </div>
       <div class="gap-grid reveal">
