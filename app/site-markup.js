@@ -18,7 +18,7 @@ export const MARKUP = `<div class="root">
               <p class="mega-lead-p">Everything a travel business needs to sell data — without becoming a telecom company.</p>
             </div>
             <div class="mega-links">
-              <a href="/solutions/travel" class="mega-link" data-nav="sol-travel"><span class="mega-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><ellipse cx="12" cy="12" rx="3.4" ry="8"/><path d="M4 12h16M5 8h14M5 16h14"/></svg></span><span class="mega-tx"><b>Travel Connectivity</b><small>Working data the moment they land, across 200+ countries.</small></span></a>
+              <a href="/solutions/travel" class="mega-link" data-nav="sol-travel"><span class="mega-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><ellipse cx="12" cy="12" rx="3.4" ry="8"/><path d="M4 12h16M5 8h14M5 16h14"/></svg></span><span class="mega-tx"><b>Travel Connectivity</b><small>Working data the moment they land, across 184 countries and 459 networks.</small></span></a>
               <a href="/solutions/partner" class="mega-link" data-nav="sol-partner"><span class="mega-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.4"/><path d="M4 19c0-2.8 2.2-5 5-5s5 2.2 5 5"/><path d="M15.5 14.2c2.1.2 3.8 2 3.8 4.8"/></svg></span><span class="mega-tx"><b>Partner Enablement</b><small>Wallets, commissions and reporting agents already understand.</small></span></a>
               <a href="/solutions/network" class="mega-link" data-nav="sol-network"><span class="mega-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 20 7 12 11 4 7 12 3Z"/><path d="M4 12l8 4 8-4M4 16.5l8 4 8-4"/></svg></span><span class="mega-tx"><b>Network Infrastructure</b><small>Multi-profile provisioning, metering and settlement at the core.</small></span></a>
               <a href="/solutions/api" class="mega-link" data-nav="sol-api"><span class="mega-ico"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="m9 8-5 4 5 4M15 8l5 4-5 4"/></svg></span><span class="mega-tx"><b>API Solutions</b><small>One private integration for onboarded partners.</small></span></a>
@@ -705,7 +705,7 @@ export const MARKUP = `<div class="root">
       <div class="eyebrow">The platform</div>
       <p class="prose-lead">Sudarva Connect brings global data, eSIM provisioning and day-to-day operations into one API-driven layer.</p>
       <p class="prose-body">Any travel business can launch a fully branded eSIM service — without upfront infrastructure, carrier contracts or telecom expertise.</p>
-      <p class="prose-strong">One integration. 200+ countries. Your brand on top.</p>
+      <p class="prose-strong">One integration. 184 countries. Your brand on top.</p>
     </div></div>
 
     <div class="section"><div class="prose reveal">
@@ -722,7 +722,7 @@ export const MARKUP = `<div class="root">
         </div>
         <div>
           <p class="prose-body">A normal SIM routes home across every border and pays retail roaming on every byte. Sudarva's multi-profile network infrastructure connects each traveller to a network in-market instead.</p>
-          <p class="prose-strong">One eSIM, many profiles — coverage across 200+ countries, without the retail roaming penalty travellers usually pay.</p>
+          <p class="prose-strong">One eSIM, many profiles — coverage across 184 countries and 459 networks, without the retail roaming penalty travellers usually pay.</p>
         </div>
       </div>
     </div>

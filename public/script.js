@@ -1,7 +1,7 @@
 /* ===== SUDARVA — front-end logic ===== */
 (function () {
   'use strict';
-  var ACC = '#ff3b30';
+  var ACC = '#E8191A';
 
   /* ---------- data ---------- */
   function svgIcon(paths, size) {
@@ -12,8 +12,8 @@
   }
 
   var stats = [
-    { value: 200, decimals: 0, suffix: '+', label: 'Countries & Regions', icon: svgIcon('<circle cx="21" cy="21" r="15"/><ellipse cx="21" cy="21" rx="6.5" ry="15"/><path d="M6 21h30M8.5 13h25M8.5 29h25"/>', 40) },
-    { value: 700, decimals: 0, suffix: '+', label: 'Network Partners', icon: svgIcon('<circle cx="15" cy="15" r="5"/><circle cx="27.5" cy="16.5" r="4"/><path d="M7 33c0-5 3.6-8.5 8-8.5s8 3.5 8 8.5"/><path d="M25 24.6c3.6.2 6.5 3.5 6.5 8.4"/>', 40) },
+    { value: 184, decimals: 0, suffix: '', label: 'Countries & Regions', icon: svgIcon('<circle cx="21" cy="21" r="15"/><ellipse cx="21" cy="21" rx="6.5" ry="15"/><path d="M6 21h30M8.5 13h25M8.5 29h25"/>', 40) },
+    { value: 459, decimals: 0, suffix: '', label: 'Network Partners', icon: svgIcon('<circle cx="15" cy="15" r="5"/><circle cx="27.5" cy="16.5" r="4"/><path d="M7 33c0-5 3.6-8.5 8-8.5s8 3.5 8 8.5"/><path d="M25 24.6c3.6.2 6.5 3.5 6.5 8.4"/>', 40) },
     { value: 10, decimals: 0, suffix: 'M+', loading: true, label: 'Profiles & counting', icon: svgIcon('<path d="M21 7 35 14 21 21 7 14 21 7Z"/><path d="M7 21l14 7 14-7"/><path d="M7 27.5l14 7 14-7"/>', 40) },
     { value: 99.99, decimals: 2, suffix: '%', label: 'Platform Uptime', icon: svgIcon('<path d="M21 6 34 11v9c0 8-5.6 12.6-13 15.5C13.6 32.6 8 28 8 20v-9L21 6Z"/><path d="M15.5 20.5 19.5 24.5 27 16.5"/>', 40) }
   ];
@@ -24,7 +24,7 @@
   var tierChannels = ['Travel apps', 'OTAs', 'Agent networks', 'Resellers'];
 
   var capabilities = [
-    { n: '01', icon: capIcon('<circle cx="24" cy="24" r="13" stroke="currentColor"/><ellipse cx="24" cy="24" rx="5.5" ry="13" stroke="currentColor"/><path d="M11 24h26M13 17h22M13 31h22" stroke="currentColor"/><circle cx="24" cy="24" r="2" fill="' + ACC + '" stroke="none"/>'), title: 'Provisioning', body: 'Issue and activate eSIM profiles across 200+ networks, with full lifecycle control — from first assignment to retirement — without disrupting a traveler mid-trip.' },
+    { n: '01', icon: capIcon('<circle cx="24" cy="24" r="13" stroke="currentColor"/><ellipse cx="24" cy="24" rx="5.5" ry="13" stroke="currentColor"/><path d="M11 24h26M13 17h22M13 31h22" stroke="currentColor"/><circle cx="24" cy="24" r="2" fill="' + ACC + '" stroke="none"/>'), title: 'Provisioning', body: 'Issue and activate eSIM profiles across 459 networks, with full lifecycle control — from first assignment to retirement — without disrupting a traveler mid-trip.' },
     { n: '02', icon: capIcon('<path d="M24 10 36 15v8c0 8-5.5 12-12 14-6.5-2-12-6-12-14v-8l12-5Z" stroke="currentColor"/><path d="M18.5 24l3.8 3.8L30 20" stroke="' + ACC + '"/>'), title: 'KYC', body: 'Verify traveler identity to local regulatory standards at the point of sale, with document capture built into the activation flow rather than bolted on after.' },
     { n: '03', icon: capIcon('<rect x="17" y="17" width="14" height="14" rx="2" stroke="currentColor"/><path d="M24 10v4M13 24h4M35 24h-4M24 38v-4M17.5 12.5l1.5 3M30.5 12.5l-1.5 3M17.5 35.5l1.5-3M30.5 35.5l-1.5-3" stroke="' + ACC + '"/>'), title: 'Metering', body: 'Track real consumption per profile, per agent, per channel in real time — the usage signal every wallet, ledger and settlement run depends on.' },
     { n: '04', icon: capIcon('<path d="M16 31a6.2 6.2 0 0 1 .8-12.3 9.2 9.2 0 0 1 17.6 2.5A5.6 5.6 0 0 1 33 31H16Z" stroke="currentColor"/><path d="M19 24.5h10M19 28h10" stroke="' + ACC + '"/>'), title: 'Settlement', body: 'Reconcile usage into commissions, agent balances and payouts automatically, so every party in the chain is paid on what was actually consumed.' }
@@ -125,7 +125,7 @@
     'sol-travel': {
       eyebrow: 'Travel Connectivity',
       title: ['Data that travels ', 'with the traveller.'],
-      lead: 'Give every traveller working data the moment they land — one eSIM, in-market networks across 200+ countries, no retail roaming penalty.',
+      lead: 'Working data the moment they land, across 184 countries and 459 networks.',
       section: {
         eyebrow: 'The problem',
         lead: 'A dead phone in a foreign airport is the worst first impression a trip can make.',
@@ -134,7 +134,7 @@
       features: [
         { t: 'Land-and-connect', b: 'Profiles activate on arrival — no setup, no kiosk, no queue. Data works before they leave the gate.' },
         { t: 'In-market networks', b: 'Each traveller connects to a network inside the country, not routed home — real local speed, no retail roaming markup.' },
-        { t: '200+ countries', b: 'One eSIM covers the whole itinerary. Multi-country trips need one profile, not one SIM per border.' },
+        { t: '184 countries', b: 'One eSIM covers the whole itinerary. Multi-country trips need one profile, not one SIM per border.' },
         { t: 'Never goes dark', b: 'Active connections are never disrupted mid-trip by a plan change or a back-office dispute.' }
       ],
       close: 'One eSIM. Every destination. Working the moment they land.'
@@ -159,7 +159,7 @@
     'sol-network': {
       eyebrow: 'Network Infrastructure',
       title: ['The rails underneath ', 'global data.'],
-      lead: 'Multi-profile provisioning, metering to the byte and automated settlement across hundreds of networks — the core infrastructure that makes everything above it possible.',
+      lead: 'Multi-profile provisioning, metering to the byte and automated settlement across 459 networks — the core infrastructure that makes everything above it possible.',
       section: {
         eyebrow: 'The problem',
         lead: 'Hundreds of carriers, hundreds of billing formats, one traveller who just wants data.',
@@ -171,7 +171,7 @@
         { t: 'Automated settlement', b: 'Carrier costs, partner commissions and payouts reconciled end to end, without manual runs.' },
         { t: '99.99% uptime', b: 'Redundancy and failover built in, because infrastructure that carries live connections cannot go down.' }
       ],
-      close: 'One integration on top. Hundreds of networks underneath. Always on.'
+      close: 'One integration on top. 459 networks underneath. Always on.'
     },
     'sol-api': {
       eyebrow: 'API Solutions',
@@ -193,7 +193,7 @@
   };
 
   var connectFeatures = [
-    { icon: '<circle cx="24" cy="24" r="13"/><ellipse cx="24" cy="24" rx="5.5" ry="13"/><path d="M11 24h26M13 17h22M13 31h22"/>', title: 'Global reach, one agreement', body: 'Access hundreds of networks across 200+ countries through a single integration, instead of negotiating market by market.' },
+    { icon: '<circle cx="24" cy="24" r="13"/><ellipse cx="24" cy="24" rx="5.5" ry="13"/><path d="M11 24h26M13 17h22M13 31h22"/>', title: 'Global reach, one agreement', body: 'Access 459 networks across 184 countries through a single integration, instead of negotiating market by market.' },
     { icon: '<path d="M24 10v28M14 18l10-8 10 8M14 30l10 8 10-8"/>', title: 'Instant provisioning', body: 'Order, activate and deliver eSIMs in real time, with no inventory to pre-stock.' },
     { icon: '<path d="M24 10 36 15v8c0 8-5.5 12-12 14-6.5-2-12-6-12-14v-8l12-5Z"/><path d="M18.5 23l3.8 3.8L30 19"/>', title: 'Identity built in', body: 'Traveller onboarding and verification handled at the layer.' },
     { icon: '<rect x="16" y="16" width="16" height="16" rx="2"/><path d="M24 10v4M13 24h4M35 24h-4M24 40v-4"/>', title: 'Metering & settlement', body: 'Usage tracked to the byte, billing and reconciliation automated end to end.' },
@@ -376,7 +376,7 @@
         ['h', 'Where the markup comes from'],
         'Roaming is a chain of wholesale agreements, each taking a margin, ending in a retail price with little relationship to what the data actually costs in-market. The traveller pays for the routing, not the data.',
         ['h', 'Connecting in-market instead'],
-        'Multi-profile infrastructure gives one eSIM many network profiles and connects the traveller to a network inside the country they are standing in. Local speed, local cost, no home-routing detour — one eSIM covering 200+ countries without the retail roaming penalty.',
+        'Multi-profile infrastructure gives one eSIM many network profiles and connects the traveller to a network inside the country they are standing in. Local speed, local cost, no home-routing detour — one eSIM covering 184 countries and 459 networks without the retail roaming penalty.',
         'The technology has existed for years. What was missing was the distribution layer to put it in the hands of the businesses travellers already use.'
       ] },
     { id: 'built-then-shown', tag: 'Company', date: 'May 2026', read: '4 min', title: 'Built, then shown: how we think about shipping', excerpt: 'We don\u2019t announce what we haven\u2019t shipped, and we don\u2019t play valuation games. A short note on the principles underneath the roadmap.',
@@ -953,7 +953,7 @@
         startLat: a[0], startLng: a[1], endLat: b[0], endLng: b[1],
         color: blue
           ? ['rgba(56,152,255,0)', 'rgba(56,152,255,0.85)', 'rgba(56,152,255,0)']
-          : ['rgba(255,59,48,0)', 'rgba(255,59,48,0.8)', 'rgba(255,59,48,0)']
+          : ['rgba(232, 25, 26,0)', 'rgba(232, 25, 26,0.8)', 'rgba(232, 25, 26,0)']
       });
     }
     var points = hubs.map(function (h) { return { lat: h[0], lng: h[1] }; });
