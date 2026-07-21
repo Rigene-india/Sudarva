@@ -386,11 +386,18 @@ export const MARKUP = `<div class="root">
       <p class="prose-body">What comes next is scale. More countries. More channels. More volume than anyone planned for. That's the work now.</p>
     </div></div>
 
-    <div class="section">
-      <div class="quote-wrap">
-        <div class="quote-mark">“</div>
-        <div class="quote-text"><span id="quote"></span><span class="caret caret--acc"></span></div>
-        <div class="quote-attr">— Founder and CEO, Sudarva</div>
+    <div class="section quote-section">
+      <div class="quote-stage" id="quote-stage" aria-live="polite">
+        <article class="quote-card is-active" data-quote>
+          <div class="quote-mark">“</div>
+          <p class="quote-text">தோல்வி என்பது எதற்கும் முடிவல்ல. அது சற்று முன்னே வந்து சேரும் தகவல். “முடியாது” என்பது மக்கள் மிக விரைவாக முடித்துவிடும் ஒரு வாக்கியம் மட்டும்தான் — ஏனெனில் பதிலை வெளியே தேடுவதை நிறுத்தி, உள்ளே தேடத் தொடங்கும் அந்த நொடியிலேயே முடியாதது முடியும். தோல்வி என்பது கடுமையான உழைப்பின் ரசீது மட்டுமே. வேலையை அஞ்சுங்கள் — உங்கள் கனவு கனவாகவே இருக்கும். தோல்வியை எதிர்கொள்ளுங்கள் — கனவு நனவாகும்.</p>
+          <div class="quote-attr">— Founder and CEO, Arun Raj</div>
+        </article>
+        <article class="quote-card" data-quote aria-hidden="true">
+          <div class="quote-mark">“</div>
+          <p class="quote-text">உள்கட்டமைப்பு தோல்வியடையும் வரை பகட்டாகத் தெரியாது. அப்படி ஆகாமல் இருக்கவே நாங்கள் கட்டுகிறோம் — அளவீடு, தீர்வு, மாற்றுவழி. அழகற்ற வேலையே தயாரிப்பு. நாங்கள் மூடும் ஒவ்வொரு விளிம்பு நிகழ்வும், தேவைப்படும் நேரத்தில் இணைந்திருக்கும் ஒரு பயணியின் கதை.</p>
+          <div class="quote-attr">— Developer, Sudarva</div>
+        </article>
       </div>
     </div>
 

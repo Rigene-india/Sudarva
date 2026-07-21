@@ -675,7 +675,6 @@
   }
 
   /* ---------- routing (URL paths) ---------- */
-  var quoteStarted = false;
   var navSilent = false;
 
   var POLICIES = (typeof window !== 'undefined' && window.SUDARVA_POLICIES) || {};
@@ -832,7 +831,7 @@
     target.classList.add('active');
     closeMenu();
     window.scrollTo(0, 0);
-    if (page === 'about' && !quoteStarted) { quoteStarted = true; startQuote(); }
+    if (page === 'about') startQuoteCarousel();
     if (!opts.silent) {
       var path = pathForView(page, opts);
       if (path) setUrl(path);
@@ -908,22 +907,28 @@
     timer = setTimeout(type, 800);
   }
 
-  /* ---------- quote ---------- */
-  function startQuote() {
-    var node = el('quote');
-    var text = 'Failure was never the end of anything. It was information, arriving early. Impossible is just a sentence people finish too early — because the impossible becomes possible the moment you stop looking outside for the answer and start looking within. Failure is only the receipt of hard work. Fear the work, and your dream stays a dream. Face the failure, and the dream comes true.';
-    var i = 0;
-    node.textContent = '';
-    function type() {
-      i++;
-      node.textContent = text.slice(0, i);
-      if (i < text.length) {
-        var ch = text[i - 1];
-        var delay = ch === '\n' ? 220 : (14 + Math.random() * 22);
-        setTimeout(type, delay);
-      }
-    }
-    setTimeout(type, 400);
+  /* ---------- quote carousel (one in / one out) ---------- */
+  var quoteTimer = null;
+  var quoteIndex = 0;
+  function startQuoteCarousel() {
+    var cards = document.querySelectorAll('[data-quote]');
+    if (cards.length < 2) return;
+    if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (quoteTimer) return;
+    var holdMs = 7000;
+    var swapMs = 750;
+    quoteTimer = setInterval(function () {
+      var cur = cards[quoteIndex];
+      var next = cards[(quoteIndex + 1) % cards.length];
+      cur.classList.remove('is-active');
+      cur.classList.add('is-exit');
+      cur.setAttribute('aria-hidden', 'true');
+      next.classList.remove('is-exit');
+      next.classList.add('is-active');
+      next.setAttribute('aria-hidden', 'false');
+      setTimeout(function () { cur.classList.remove('is-exit'); }, swapMs);
+      quoteIndex = (quoteIndex + 1) % cards.length;
+    }, holdMs);
   }
 
   /* ---------- globe ---------- */
