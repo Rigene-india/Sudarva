@@ -492,8 +492,10 @@
           '</header>' +
           '<section class="section ins-page-body">' +
             '<div class="ins-shell">' +
-              spotlight +
-              (grid ? '<div class="ins-grid">' + grid + '</div>' : '') +
+              '<div class="ins-feed">' +
+                spotlight +
+                (grid ? '<div class="ins-grid">' + grid + '</div>' : '') +
+              '</div>' +
             '</div>' +
           '</section>' +
         '</div>'
